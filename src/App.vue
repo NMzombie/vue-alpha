@@ -8,21 +8,21 @@
 
     <div class="nav">
       <mt-tabbar v-model="selected">
-        <mt-tab-item id="home" >
-          <div slot="icon" class="iconfont"  @click="navclick('home')">&#xe604;</div>
+        <mt-tab-item id="home" @click.native="navclick('home')">
+          <div slot="icon" class="iconfont">&#xe604;</div>
           主页
         </mt-tab-item>
-        <mt-tab-item id="member">
-          <div slot="icon" class="iconfont" @click="navclick('member')">&#xe604;</div>
+        <mt-tab-item id="member" @click.native="navclick('member')">
+          <div slot="icon" class="iconfont">&#xe604;</div>
           用户
         </mt-tab-item>
-        <mt-tab-item id="shopcar">
+        <mt-tab-item id="shopcar" @click.native="navclick('shopcar')">
           <mt-badge size="small" type="error" class="badge">30</mt-badge>
-          <div slot="icon" class="iconfont" @click="navclick('shopcar')">&#xe604;</div>
+          <div slot="icon" class="iconfont">&#xe604;</div>
           购物车
         </mt-tab-item>
-        <mt-tab-item id="search">
-          <div slot="icon" class="iconfont" @click="navclick('search')">&#xe604;</div>
+        <mt-tab-item id="search" @click.native="navclick('search')">
+          <div slot="icon" class="iconfont">&#xe604;</div>
           搜索
         </mt-tab-item>
       </mt-tabbar>
@@ -35,7 +35,7 @@ export default {
   name: 'App',
   data(){
     return {
-      selected:''
+      selected:'home'
     }
   },
   methods:{
@@ -49,8 +49,10 @@ export default {
   },
   mounted () {
     // this.selected = this.$route.path
-    let str=this.$route.path
-    console.log(str.substr(1))
+    let str=this.$route.path;
+    console.log(str.substr(1));
+    this.selected = str.substr(1);
+    console.log(str.indexOf('h'))
   }
 }
 

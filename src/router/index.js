@@ -12,7 +12,7 @@ export default new Router({
   routes: [
     {
       path:'/',
-      component: HomeContainer
+      redirect: '/home'
     },
     {
       path: '/home',
