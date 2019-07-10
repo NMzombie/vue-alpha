@@ -1,30 +1,29 @@
 <template>
   <div class="app-container">
     <mt-header fixed title="KZY的练习项目"></mt-header>
-    <h1>呜啦啦啦</h1>
 
 
-
+    <router-view></router-view>
 
 
     <div class="nav">
       <mt-tabbar v-model="selected">
-        <mt-tab-item id="外卖">
-          <!--<img slot="icon" src="assets/100x100.png" alt="">-->
-          <div slot="icon" class="iconfont">&#xe604;</div>
-          外卖
+        <mt-tab-item id="home" >
+          <div slot="icon" class="iconfont"  @click="navclick('home')">&#xe604;</div>
+          主页
         </mt-tab-item>
-        <mt-tab-item id="订单">
-          <img slot="icon" src="assets/100x100.png" alt="">
-          订单
+        <mt-tab-item id="member">
+          <div slot="icon" class="iconfont" @click="navclick('member')">&#xe604;</div>
+          用户
         </mt-tab-item>
-        <mt-tab-item id="发现">
-          <img slot="icon" src="assets/100x100.png" alt="">
-          发现
+        <mt-tab-item id="shopcar">
+          <mt-badge size="small" type="error" class="badge">30</mt-badge>
+          <div slot="icon" class="iconfont" @click="navclick('shopcar')">&#xe604;</div>
+          购物车
         </mt-tab-item>
-        <mt-tab-item id="我的">
-          <img slot="icon" src="assets/100x100.png" alt="">
-          我的
+        <mt-tab-item id="search">
+          <div slot="icon" class="iconfont" @click="navclick('search')">&#xe604;</div>
+          搜索
         </mt-tab-item>
       </mt-tabbar>
     </div>
@@ -38,8 +37,23 @@ export default {
     return {
       selected:''
     }
+  },
+  methods:{
+    navclick(a) {
+      // console.log(this.$route.path)
+      this.$router.push({
+        path: a
+      })
+      // console.log(this.$route.path)
+    }
+  },
+  mounted () {
+    // this.selected = this.$route.path
+    let str=this.$route.path
+    console.log(str.substr(1))
   }
 }
+
 </script>
 
 <style scoped>
@@ -61,4 +75,12 @@ export default {
 .app-container {
   padding-top: 40px;
 }
+  .badge{
+    position: absolute;
+    top: 7px;
+    right: 110px;
+  }
+  .mint-tab-item.is-selected{
+    background-color:transparent;
+  }
 </style>
