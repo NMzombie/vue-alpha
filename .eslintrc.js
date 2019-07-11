@@ -40,6 +40,8 @@ module.exports = {
     'comma-spacing':0,
     'space-before-function-paren':0,
     'space-before-blocks':0,
-    'keyword-spacing':0
+    'keyword-spacing':0,
+    'no-multi-spaces':0,
+    'spaced-comment':0
   }
 }

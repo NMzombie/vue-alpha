@@ -2,9 +2,9 @@
   <div class="app-container">
     <mt-header fixed title="KZY的练习项目"></mt-header>
 
-
+    <transition>
     <router-view></router-view>
-
+    </transition>
 
     <div class="nav">
       <mt-tabbar v-model="selected">
@@ -17,8 +17,7 @@
           用户
         </mt-tab-item>
         <mt-tab-item id="shopcar" @click.native="navclick('shopcar')">
-          <mt-badge size="small" type="error" class="badge">30</mt-badge>
-          <div slot="icon" class="iconfont">&#xe604;</div>
+          <div slot="icon" class="iconfont" style="position: relative;">&#xe604;<mt-badge size="small" type="error" class="badge"><span>30</span></mt-badge></div>
           购物车
         </mt-tab-item>
         <mt-tab-item id="search" @click.native="navclick('search')">
@@ -58,7 +57,7 @@ export default {
 
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
   @font-face {
     font-family: 'iconfont';  /* project id 1265285 */
     src: url('//at.alicdn.com/t/font_1265285_3nzw6s08aus.eot');
@@ -74,15 +73,36 @@ export default {
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;}
+
+  .app-container{
+    overflow-x:hidden;
+  }
 .app-container {
   padding-top: 40px;
 }
   .badge{
+    display: inline-block;
     position: absolute;
-    top: 7px;
-    right: 110px;
+    top: -2px;
+    right: -17px;
+    line-height: 1;
+  }
+  .badge span{
+    -webkit-text-stroke-width: 0;
+    font-family:PingFangSC-Regular,sans-serif;
   }
   .mint-tab-item.is-selected{
     background-color:transparent;
+  }
+  .v-enter{
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  .v-leave-to{
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  .v-enter-active,v-leave-active{
+    transition: all 0.5s ease ;
   }
 </style>

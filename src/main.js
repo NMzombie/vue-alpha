@@ -4,15 +4,20 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import 'mint-ui/lib/style.css'
-import { Header,Tabbar,TabItem,Badge } from 'mint-ui';
+import { Header,Tabbar,TabItem,Badge,Swipe, SwipeItem } from 'mint-ui';
+import axios from 'axios'
+import qs from 'qs'
 Vue.config.productionTip = false
 Vue.use(router)
-
+Vue.prototype.$axios = axios // 全局注册，使用方法为:this.$axios
+Vue.prototype.qs = qs
 
 Vue.component(Tabbar.name, Tabbar);
 Vue.component(TabItem.name, TabItem);
 Vue.component(Header.name, Header);
 Vue.component(Badge.name, Badge);
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
 
 /* eslint-disable no-new */
 new Vue({
