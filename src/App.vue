@@ -8,19 +8,23 @@
 
     <div class="nav">
       <mt-tabbar v-model="selected">
-        <mt-tab-item id="home" @click.native="navclick('home')">
+        <!--<router-link to="/home" class="mint-tab-item is-selected">-->
+          <!--<div class="mint-tab-item-icon"><div slot="icon" class="iconfont">&#xe604;</div></div>-->
+          <!--<div class="mint-tab-item-label">主页</div>-->
+        <!--</router-link>-->
+        <mt-tab-item id="home" @click.native="navclick('/home')">
           <div slot="icon" class="iconfont">&#xe604;</div>
           主页
         </mt-tab-item>
-        <mt-tab-item id="member" @click.native="navclick('member')">
+        <mt-tab-item id="member" @click.native="navclick('/member')">
           <div slot="icon" class="iconfont">&#xe604;</div>
           用户
         </mt-tab-item>
-        <mt-tab-item id="shopcar" @click.native="navclick('shopcar')">
+        <mt-tab-item id="shopcar" @click.native="navclick('/shopcar')">
           <div slot="icon" class="iconfont" style="position: relative;">&#xe604;<mt-badge size="small" type="error" class="badge"><span>30</span></mt-badge></div>
           购物车
         </mt-tab-item>
-        <mt-tab-item id="search" @click.native="navclick('search')">
+        <mt-tab-item id="search" @click.native="navclick('/search')">
           <div slot="icon" class="iconfont">&#xe604;</div>
           搜索
         </mt-tab-item>
@@ -39,19 +43,20 @@ export default {
   },
   methods:{
     navclick(a) {
-      // console.log(this.$route.path)
       this.$router.push({
         path: a
       })
-      // console.log(this.$route.path)
     }
   },
   mounted () {
-    // this.selected = this.$route.path
     let str=this.$route.path;
-    console.log(str.substr(1));
-    this.selected = str.substr(1);
-    console.log(str.indexOf('h'))
+    if (str.indexOf('home')!==-1) this.selected = 'home'
+    if (str.indexOf('member')!==-1) this.selected = 'member'
+    if (str.indexOf('shopcar')!==-1) this.selected = 'shopcar'
+    if (str.indexOf('search')!==-1) this.selected = 'search'
+    // console.log(str.substr(1));
+    //   this.selected = str.substr(1);
+    // console.log(str.indexOf('h'))
   }
 }
 

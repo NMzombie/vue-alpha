@@ -7,12 +7,12 @@
   </mt-swipe>
 
   <ul class="body-nav">
-    <li><i class="iconfont">&#xe633;</i><div>新闻资讯</div></li>
-    <li><i class="iconfont">&#xe633;</i><div>图片分享</div></li>
-    <li><i class="iconfont">&#xe633;</i><div>商品购买</div></li>
-    <li><i class="iconfont">&#xe633;</i><div>留言反馈</div></li>
-    <li><i class="iconfont">&#xe633;</i><div>视频专区</div></li>
-    <li><i class="iconfont">&#xe633;</i><div>联系我们</div></li>
+    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>新闻资讯</div></li></router-link>
+    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>图片分享</div></li></router-link>
+    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>商品购买</div></li></router-link>
+    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>留言反馈</div></li></router-link>
+    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>视频专区</div></li></router-link>
+    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>联系我们</div></li></router-link>
   </ul>
   <h1>HOME</h1>
 </div>
@@ -36,7 +36,7 @@
       getLunbotu(){
         this.$axios({
           method:'post',
-          url:'http://dev.wegoomall.cn/doc/api/common/newsArticle/findArticleInformation',
+          url:this.GLOBAL.baseURL +'/doc/api/common/newsArticle/findArticleInformation',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           },
@@ -70,6 +70,12 @@
     -webkit-font-smoothing: antialiased;
     -webkit-text-stroke-width: 0.2px;
     -moz-osx-font-smoothing: grayscale;}
+  a,a:hover,a:active,a:visited,a:link,a:focus{
+    outline:none;
+    background: none;
+    text-decoration: none;
+    color: black;
+  }
 .mint-swipe{
   height: 200px;
    .mint-swipe-item{
@@ -89,16 +95,22 @@
   padding: 0;
   flex-wrap: wrap;
   height: 250px;
-    li{
+  a{
       display: flex;
-      flex-direction: column;
       justify-content: center;
       flex-basis: 33%;
       list-style: none;
+    li{
+      display: flex;
+      justify-content: center;
       align-items: center;
+      flex-direction: column;
       i{
         margin-bottom: 5px;
       }
     }
+
+
+  }
   }
 </style>
