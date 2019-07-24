@@ -7,48 +7,123 @@
   </mt-swipe>
 
   <ul class="body-nav">
-    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>新闻资讯</div></li></router-link>
+    <router-link :to="{path:'/home/newslist',query:{id:222,sb:count}}"><li><i class="iconfont">&#xe633;</i><div>新闻资讯</div></li></router-link>
     <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>图片分享</div></li></router-link>
     <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>商品购买</div></li></router-link>
     <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>留言反馈</div></li></router-link>
     <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>视频专区</div></li></router-link>
     <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>联系我们</div></li></router-link>
   </ul>
+  <h2 v-for="item in newslist.slice(0,3)" :key="item.id">{{item.createTime | dataFormat}}</h2>
+  <fuck v-bind:parentmsg="count" @func="show"></fuck>
+  <input type="text" v-model="demo">
   <h1>HOME</h1>
+  <ul class="sss">
+    <li :class="{'active':actives === 1}" @click="active(1)">11</li>
+    <li :class="{'active':actives === 2}" @click="active(2)">22</li>
+    <li :class="{'active':actives === 3}" @click="active(3)">33</li>
+  </ul>
+  <MemberContainer></MemberContainer>
 </div>
 </template>
 
+
 <script>
+  import MemberContainer from '@/components/tabbar/MemberContainer'
+
   export default {
     name: 'homecontainer',
     data(){
      return{
      urldata:{
        articleType:0
+     },
+       count: 0,
+       dataMsgFromson:null,
+       newslist:[],
+       lala:'',
+       url:{id:222,sb:this.count},
+       actives:1,
+       demo:''
      }
-     }
+    },
+    components:{
+      fuck:{
+        template:'<div><button v-on:click="ck">You clicked me {{ sb }} times.</button><button @click="myclick">啊啊啊</button></div>',
+        data(){
+          return{
+            sb:this.parentmsg,
+            sonmsg: {title:'这是子组件的数据~~',num:233}
+          }
+        },
+        props:['parentmsg'],
+        methods:{
+          ck(e){
+            this.sb++;
+          },
+          myclick(){
+            this.$emit('func',this.sonmsg)
+          }
+        }
+      },
+      MemberContainer
     },
     created(){
-      this.getLunbotu()
-      console.log(22)
+      this.getLunbotu().then(res => {
+        this.newslist = res;
+        console.log(this.newslist)
+      });
+      return this.count;
     },
     methods:{
+
       getLunbotu(){
-        this.$axios({
-          method:'post',
-          url:this.GLOBAL.baseURL +'/doc/api/common/newsArticle/findArticleInformation',
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          },
-          data:`data=${JSON.stringify(this.urldata)}`
-          //   this.qs.stringify({    //这里是发送给后台的数据
-          //   articleType:0
-          // })
-        }).then((response) => {          //这里使用了ES6的语法
-          console.log(response.data.data)       //请求成功返回的数据
-        }).catch((error) => {
-          console.log(error)       //请求失败返回的数据
+        return new Promise((resolve, reject) => {
+          this.$axios({
+            method: 'post',
+            url: this.GLOBAL + '/doc/api/common/newsArticle/findArticleInformation',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: `data=${JSON.stringify(this.urldata)}`
+            //   this.qs.stringify({    //这里是发送给后台的数据
+            //   articleType:0
+            // })
+          }).then((response) => {
+            resolve(response.data.data.list);
+            // this.newslist = response.data.data.list;
+            // console.log(this.newslist)
+            //请求成功返回的数据
+          }).catch((error) => {
+            console.log(error)       //请求失败返回的数据
+          })
         })
+      },
+
+      show(a){
+        this.dataMsgFromson=a;
+        console.log('这是子组件传过来的数据'+'+'+this.dataMsgFromson.title)
+      },
+
+      active(index){
+        this.actives = index;
+      }
+
+    },
+    computed:{
+      shuzu(){
+        let sb = [];
+        if(this.newslist.length>0){
+        for(let i=0; i<3; i++){
+          sb.push(this.newslist[i])
+        }
+        return sb
+        }
+      }
+    },
+    watch:{
+      demo(val,old){
+        console.log(val+'---'+old)
       }
     }
   }
@@ -75,6 +150,18 @@
     background: none;
     text-decoration: none;
     color: black;
+  }
+  .sss{
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0;
+    list-style: none;
+      li {
+        width: 50%;
+      }
+  }
+  .active{
+    color:red;
   }
 .mint-swipe{
   height: 200px;

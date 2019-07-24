@@ -1,26 +1,14 @@
 <template>
 <div>
   <h1>新闻列表页面</h1>
-  <ul class="news-container">
-    <li>
+  <h1>this is{{$route.query.id}}</h1>
+  <h2>{{$store.state.sb}}</h2>
+  <ul class="news-container" >
+    <li v-for="item in a" :key="item">
       <img alt="" src="https://file.wchoosemall.com/platform/manager/pic/20190710/16658765867330016.png">
       <div class="news-content">
       <div class="title">啦啦啦</div>
       <div class="time"><span>发表时间:2019-7-12</span><span>点击：0</span></div>
-      </div>
-    </li>
-    <li>
-      <img alt="" src="https://file.wchoosemall.com/platform/manager/pic/20190710/16658765867330016.png">
-      <div class="news-content">
-        <div class="title">啦啦啦</div>
-        <div class="time"><span>发表时间:2019-7-12</span><span>点击：0</span></div>
-      </div>
-    </li>
-    <li>
-      <img alt="" src="https://file.wchoosemall.com/platform/manager/pic/20190710/16658765867330016.png">
-      <div class="news-content">
-        <div class="title">啦啦啦</div>
-        <div class="time"><span>发表时间:2019-7-12</span><span>点击：0</span></div>
       </div>
     </li>
   </ul>
@@ -32,7 +20,12 @@
     name: 'NewsList',
     data(){
       return{
-
+         a:[1,2,3,4,5]
+      }
+    },
+    computed:{
+      myId(){
+        return this.$route.query.id;
       }
     }
   }

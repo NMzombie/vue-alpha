@@ -7,7 +7,7 @@
     </transition>
 
     <div class="nav">
-      <mt-tabbar v-model="selected">
+      <mt-tabbar v-model="selected" style="position: fixed">
         <!--<router-link to="/home" class="mint-tab-item is-selected">-->
           <!--<div class="mint-tab-item-icon"><div slot="icon" class="iconfont">&#xe604;</div></div>-->
           <!--<div class="mint-tab-item-label">主页</div>-->
@@ -84,6 +84,7 @@ export default {
   }
 .app-container {
   padding-top: 40px;
+  padding-bottom: 50px;
 }
   .badge{
     display: inline-block;

@@ -1,6 +1,7 @@
-const baseURL = 'http://dev.wegoomall.cn/' //服务器IP
+const baseURL = 'http://dev.wegoomall.cn/';//服务器IP
+let a = {baseURL:'http://dev.wegoomall.cn/',sb:11111};
 export default {
-  baseURL
+  baseURL,a
 }
 // var instance = axios.create({
 //   baseURL: 'http://dev.wegoomall.cn/',
