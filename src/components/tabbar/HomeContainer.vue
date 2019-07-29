@@ -5,14 +5,8 @@
     <mt-swipe-item>2</mt-swipe-item>
     <mt-swipe-item>3</mt-swipe-item>
   </mt-swipe>
-
   <ul class="body-nav">
-    <router-link :to="{path:'/home/newslist',query:{id:222,sb:count}}"><li><i class="iconfont">&#xe633;</i><div>新闻资讯</div></li></router-link>
-    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>图片分享</div></li></router-link>
-    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>商品购买</div></li></router-link>
-    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>留言反馈</div></li></router-link>
-    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>视频专区</div></li></router-link>
-    <router-link to="/home/newslist"><li><i class="iconfont">&#xe633;</i><div>联系我们</div></li></router-link>
+    <router-link v-for="item in RouterData" :key="item.title" :to="{path:item.path,query:item.query}"><li><i class="iconfont">&#xe633;</i><div>{{item.title}}</div></li></router-link>
   </ul>
   <h2 v-for="item in newslist.slice(0,3)" :key="item.id">{{item.createTime | dataFormat}}</h2>
   <fuck v-bind:parentmsg="count" @func="show"></fuck>
@@ -23,7 +17,9 @@
     <li :class="{'active':actives === 2}" @click="active(2)">22</li>
     <li :class="{'active':actives === 3}" @click="active(3)">33</li>
   </ul>
-  <MemberContainer></MemberContainer>
+  <memberContainer><template slot-scope="lalala"><h1>插插插插{{lalala}}</h1></template></memberContainer>
+  <!-- <memberContainer><template v-slot:chacao="lalala"><h1>插插插插{{lalala}}</h1></template></memberContainer> -->
+  <router-view></router-view>
 </div>
 </template>
 
@@ -44,7 +40,39 @@
        lala:'',
        url:{id:222,sb:this.count},
        actives:1,
-       demo:''
+       demo:'',
+       RouterData:[
+         {
+           path:'/home/newslist',
+           query:{id:222,sb:this.count},
+           title:'新闻资讯'
+         },
+         {
+           path:'/home/newslist',
+           query:{id:222,sb:this.count},
+           title:'图片分享'
+         },
+         {
+           path:'/home/newslist',
+           query:{id:222,sb:this.count},
+           title:'商品购买'
+         },
+         {
+           path:'/home/newslist',
+           query:{id:222,sb:this.count},
+           title:'留言反馈'
+         },
+         {
+           path:'/home/newslist',
+           query:{id:222,sb:this.count},
+           title:'视频专区'
+         },
+         {
+           path:'/home/newslist',
+           query:{id:222,sb:this.count},
+           title:'联系我们'
+         }
+       ]      
      }
     },
     components:{
